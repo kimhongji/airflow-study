@@ -16,10 +16,10 @@ Airflow 란? https://airflow.apache.org/
 
 - webserver와 scheduler 두개를 실행 시키고 시작
 
-'''
+```
 airflow webserver
 airflow scheduler
-'''
+```
 
 - Webserver: 웹 UI를 표현, workflow 상태 표시 실행, 조작 등 관리
 - Scheduler: 설정한 작업 기준이 충족되었는지 확인, 선행 작업 확인, OK 하면 현재 task 들이 worker에 의해 실행됨
@@ -27,11 +27,11 @@ airflow scheduler
 - 의존 관계는 >> , << 로도 가능한데 full 로는 아래와 같이 표현 함
 - 세번째 줄은 task1 후에 task2, task3 병렬 실행을 의미함
 
-'''
+```
 task1.set_downstream(task2)
 task2.set_upstream(task1)
 task1 >> [task2, task3]
-'''
+```
 
 - 자세한 예시는 튜토리얼(https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html) 참고
 - schedule 은 crontab 표현을 사용함 
