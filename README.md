@@ -1,7 +1,9 @@
 # airflow-study
 airflow tutorial &amp; study
 
-Airflow 란? https://airflow.apache.org/
+---------------------
+
+## Airflow 란? https://airflow.apache.org/
 - workflow management tool 임
 - 사용하는 이유
  : ETL 작업 등 여러 시퀀셜한 로직등이 필요로 하는 작업이 있을 때 이를 관리할 수 있는게 필요함. 보통 관리할게 적다면 cron 등과 같은 자동 실행 도구를 사용하겠지만 작업이 많아질 경우 관리가 어려워짐. 이런걸 worklow management 라고 하며 기존 hadoop oozie, luigi 같은 솔루션이 있었음
@@ -40,7 +42,7 @@ task1 >> [task2, task3]
 - Priority Weight: task 단위로 지정하며 기본 값은 1, 숫자 값이 높을수록 우선순위 지정됨. 
 - 위의 두 pool 과 priority 문제를 저절히 사용하여 부하를 조정하며 성능을 튜닝할 수 있음
 
-다른 Workflow Management 와의 차이점은 뭐지?
+## 다른 Workflow Management 와의 차이점은 뭐지?
 1. oozie : airflow 에 비해 web gui 도 약하고 java나 xml 로 관리함, 파이프 라인 구축이 복잡함, 대체적으로 UI 와 task 의존성 관리 측면에서 airflow 가 우수하다는 의견이 많음, 그리고 표현이 간결한 게 airflow 장점으로 꼽힘
 
 
