@@ -51,7 +51,7 @@ task1 >> [task2, task3]
 ----------------------
 
 ## Quick Start and Tutorial
-Link : https://airflow.apache.org/docs/apache-airflow/stable/start.html / https://airflow.apache.org/docs/apache-airflow/stable/installation.html
+Link : https://airflow.apache.org/docs/apache-airflow/1.10.14/tutorial.html / https://airflow.apache.org/docs/apache-airflow/1.10.14/installation.html
 
 Mac OS
 ```
@@ -77,11 +77,14 @@ $ airflow schedular
 ```
 ![image](https://user-images.githubusercontent.com/36401495/104279878-5df1a800-54ee-11eb-8de3-986170102f4d.png)
 
+## Tutorial
+code: tutorial.py
+
 ## 참고
  https://zzsza.github.io/data/2018/01/04/airflow-1/,
  
  https://zzsza.github.io/kyle-school/week6/#/, 
  
- https://airflow.apache.org/docs/apache-airflow/stable/index.html
+ https://airflow.apache.org/docs/apache-airflow/1.10.14/index.html
  
  카카오페이지 if kakao : https://mk.kakaocdn.net/dn/if-kakao/conf2019/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C_2019/T03-S04.pdf)
