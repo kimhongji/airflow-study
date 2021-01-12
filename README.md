@@ -5,7 +5,6 @@ airflow tutorial &amp; study
 
 [2. Quick Start](#qick-start)
 
-[3. Tutorial](#tutorial)
 ---------------------
 
 ## Airflow 란? 
