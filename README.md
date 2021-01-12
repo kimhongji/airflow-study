@@ -5,6 +5,8 @@ airflow tutorial &amp; study
 
 ## Airflow 란? https://airflow.apache.org/
 - workflow management tool 임
+- 원칙: Dynamic(pipeline 생성에 있어서 동적으로 코드 관리), Extensible(각자의 operator, executor 를 확장 가능), Elagant(pipeline 이 간결하고 명시적), Scalable(modular 구조와 메시지 큐 이용으로 n 개의 워커 위에서 돌아갈 수 있고, 무한히 확장이 가능함)
+- Airflow 
 - 사용하는 이유
  : ETL 작업 등 여러 시퀀셜한 로직등이 필요로 하는 작업이 있을 때 이를 관리할 수 있는게 필요함. 보통 관리할게 적다면 cron 등과 같은 자동 실행 도구를 사용하겠지만 작업이 많아질 경우 관리가 어려워짐. 이런걸 worklow management 라고 하며 기존 hadoop oozie, luigi 같은 솔루션이 있었음
  : 여러 작업들의 연결성(의존성) 을 관리할 수 있어서, 이전 작업의 결과가 다음 작업에 영향을 미침
