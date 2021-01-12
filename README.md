@@ -1,9 +1,13 @@
 # airflow-study
 airflow tutorial &amp; study
 
+[Airflow 란?](#Airflow 란?)
+[Quick Start](#Qick Start)
+
 ---------------------
 
-## Airflow 란? https://airflow.apache.org/
+## Airflow 란? 
+https://airflow.apache.org/
 - workflow management tool 임
 - 원칙: Dynamic(pipeline 생성에 있어서 동적으로 코드 관리), Extensible(각자의 operator, executor 를 확장 가능), Elagant(pipeline 이 간결하고 명시적), Scalable(modular 구조와 메시지 큐 이용으로 n 개의 워커 위에서 돌아갈 수 있고, 무한히 확장이 가능함)
 - Airflow 는 strom, spark streaming 같은 데이터 스트리밍 솔루션이 아니기 때문에 각 task 는 데이터를 이동 시켜 주지 않는다. 
@@ -50,7 +54,7 @@ task1 >> [task2, task3]
 
 ----------------------
 
-## Quick Start and Tutorial
+## Quick Start
 Link : https://airflow.apache.org/docs/apache-airflow/1.10.14/tutorial.html / https://airflow.apache.org/docs/apache-airflow/1.10.14/installation.html
 
 Mac OS
