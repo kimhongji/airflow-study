@@ -75,7 +75,7 @@ $ airflow users create \
 $ airflow webserver --port 8080
 $ airflow schedular
 ```
-
+![image](https://user-images.githubusercontent.com/36401495/104279878-5df1a800-54ee-11eb-8de3-986170102f4d.png)
 
 ## 참고
  https://zzsza.github.io/data/2018/01/04/airflow-1/,
