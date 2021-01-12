@@ -21,8 +21,8 @@ airflow tutorial &amp; study
 - webserver와 scheduler 두개를 실행 시키고 시작
 
 ```
-airflow webserver
-airflow scheduler
+$ airflow webserver
+$ airflow scheduler
 ```
 
 - Webserver: 웹 UI를 표현, workflow 상태 표시 실행, 조작 등 관리
