@@ -6,7 +6,7 @@ airflow tutorial &amp; study
 ## Airflow 란? https://airflow.apache.org/
 - workflow management tool 임
 - 원칙: Dynamic(pipeline 생성에 있어서 동적으로 코드 관리), Extensible(각자의 operator, executor 를 확장 가능), Elagant(pipeline 이 간결하고 명시적), Scalable(modular 구조와 메시지 큐 이용으로 n 개의 워커 위에서 돌아갈 수 있고, 무한히 확장이 가능함)
-- Airflow 
+- Airflow 는 strom, spark streaming 같은 데이터 스트리밍 솔루션이 아니기 때문에 각 task 는 데이터를 이동 시켜 주지 않는다. 
 - 사용하는 이유
  : ETL 작업 등 여러 시퀀셜한 로직등이 필요로 하는 작업이 있을 때 이를 관리할 수 있는게 필요함. 보통 관리할게 적다면 cron 등과 같은 자동 실행 도구를 사용하겠지만 작업이 많아질 경우 관리가 어려워짐. 이런걸 worklow management 라고 하며 기존 hadoop oozie, luigi 같은 솔루션이 있었음
  : 여러 작업들의 연결성(의존성) 을 관리할 수 있어서, 이전 작업의 결과가 다음 작업에 영향을 미침
@@ -48,7 +48,12 @@ task1 >> [task2, task3]
 1. oozie : airflow 에 비해 web gui 도 약하고 java나 xml 로 관리함, 파이프 라인 구축이 복잡함, 대체적으로 UI 와 task 의존성 관리 측면에서 airflow 가 우수하다는 의견이 많음, 그리고 표현이 간결한 게 airflow 장점으로 꼽힘
 
 
+----------------------
+
+# Quick Start and Tutorial
+Link : https://airflow.apache.org/docs/apache-airflow/stable/start.html
 
 (참고: https://zzsza.github.io/data/2018/01/04/airflow-1/,
-          https://zzsza.github.io/kyle-school/week6/#/
+          https://zzsza.github.io/kyle-school/week6/#/, 
+          https://airflow.apache.org/docs/apache-airflow/stable/index.html
 카카오페이지 if kakao : https://mk.kakaocdn.net/dn/if-kakao/conf2019/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C_2019/T03-S04.pdf)
