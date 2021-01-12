@@ -73,7 +73,7 @@ $ airflow users create \
 --email hayz.de@kakaoenterprise.com
 
 $ airflow webserver --port 8080
-$ airflow schedular
+$ airflow scheduler
 ```
 ![image](https://user-images.githubusercontent.com/36401495/104279878-5df1a800-54ee-11eb-8de3-986170102f4d.png)
 
