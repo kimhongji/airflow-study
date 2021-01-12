@@ -50,10 +50,11 @@ task1 >> [task2, task3]
 
 ----------------------
 
-# Quick Start and Tutorial
+## Quick Start and Tutorial
 Link : https://airflow.apache.org/docs/apache-airflow/stable/start.html
 
-(참고: https://zzsza.github.io/data/2018/01/04/airflow-1/,
-          https://zzsza.github.io/kyle-school/week6/#/, 
-          https://airflow.apache.org/docs/apache-airflow/stable/index.html
-카카오페이지 if kakao : https://mk.kakaocdn.net/dn/if-kakao/conf2019/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C_2019/T03-S04.pdf)
+## 참고
+ https://zzsza.github.io/data/2018/01/04/airflow-1/,
+ https://zzsza.github.io/kyle-school/week6/#/, 
+ https://airflow.apache.org/docs/apache-airflow/stable/index.html
+ 카카오페이지 if kakao : https://mk.kakaocdn.net/dn/if-kakao/conf2019/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C_2019/T03-S04.pdf)
