@@ -51,11 +51,17 @@ task1 >> [task2, task3]
 ----------------------
 
 ## Quick Start and Tutorial
-Link : https://airflow.apache.org/docs/apache-airflow/stable/start.html
+Link : https://airflow.apache.org/docs/apache-airflow/stable/start.html / https://airflow.apache.org/docs/apache-airflow/stable/installation.html
 
 Mac OS
 ```
-sudo easy_install pip  // brew install python -> pip3 로 
+sudo easy_install pip  // brew install python -> pip3 로 설치됨 (pip -V 로  20.2.4 확인)
+sudo -H pip install apache-airflow // pip 버전이 20.3 이상이라면 --use-deprecated legacy-resolver 옵션 추가
+//실제 command 는 아래 임 permission 문제 때문에 --user 옵션을 추가하고 실행함
+sudo -H pip install --user apache-airflow==1.10.14 --use-deprecated legacy-resolver --constraint https://raw.githubusercontent.com/apache/airflow/constraints-1.10.14/constraints-2.7.txt
+pip freeze | grep airflow
+vi ~/.bash_profile //path 설정
+
 ```
 
 ## 참고
