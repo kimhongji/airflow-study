@@ -1,8 +1,8 @@
 # airflow-study
 airflow tutorial &amp; study
 
-[1. Airflow 란?](#airflow-란?)
-[2. Quick Start](#quick-start)
+1. [Airflow 란?](#airflow-란?)  
+2. [Quick Start](#quick-start)
 
 ---------------------
 
