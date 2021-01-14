@@ -83,9 +83,6 @@ $ airflow scheduler
 ![image](https://user-images.githubusercontent.com/36401495/104279878-5df1a800-54ee-11eb-8de3-986170102f4d.png)
 
 ## Tutorial
-code: tutorial_hayz.py
-task1: print_date (bash: 'date')
-task2: print_wd  (base: 'pwd')
 
 ### 코드 설명
 1. Default Arguments: dictionary 형식으로 표현된 DAG 생성자에 대한 기본 변수 설정 값
@@ -216,7 +213,9 @@ $ airflow list_dags #print the list of active DAGs
 8. Backfill
 
 
-
+code: tutorial_hayz.py  
+task1: print_date (bash: 'date')  
+task2: print_wd  (base: 'pwd')  
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
 
 
