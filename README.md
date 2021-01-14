@@ -159,7 +159,8 @@ t2 = BashOperator(
    : 파이썬 위에서 디자인을 원활히 해주기 위한 templating 언어/ 웹으로 확인을 할 수 있도록?
  - Airflow 에서의 역할은 파라미터들을 전달해줌. params에 건내 받은 인자를 이용해 bash_command 에서 받은 인자를 이용 
    params는 dictionary 형태로 선언.
- - Airflow 에서의 역할은 파라미터들을 전달해줌. params에 건내 받은 인자를 이용해 bash_command 에서 받은 인자를 이용가능
+   
+5. 
 
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
 
