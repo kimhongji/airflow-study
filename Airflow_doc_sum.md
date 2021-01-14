@@ -4,7 +4,7 @@
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
 
-=========================
+-----------------------------
 
 ## UI/Screenshots (https://airflow.apache.org/docs/apache-airflow/stable/ui.html)
 
