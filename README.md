@@ -90,8 +90,8 @@ $ airflow scheduler
 
 ```python
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
+    'owner': 'airflow',                                #owner of the task
+    'depends_on_past': False,                          #이전 task의 성공 여부를 반영하여 실행할지
     'start_date': days_ago(2),
     'email': ['airflow@example.com'],
     'email_on_failure': False,
