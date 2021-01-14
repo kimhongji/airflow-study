@@ -86,6 +86,11 @@ code: tutorial_hayz.py
 task1: print_date (bash: 'date')
 task2: print_wd  (base: 'pwd')
 
+### 코드 설명
+1. Default Arguments
+
+
+
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
 
 
