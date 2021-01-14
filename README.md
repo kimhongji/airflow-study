@@ -138,7 +138,7 @@ task에 대한 규칙 및 룰
     (ex, bash_command, task_id etc)
  (3) task_id와 owner 는 무조건 명시
  
- ```
+ ```python
  t1 = BashOperator(
     task_id='print_date',
     bash_command='date',
@@ -181,7 +181,7 @@ t3 = BashOperator(
 5.DAG 와 tasks document
 DAG나 각 싱글 task에 대해서 각각 문서를 추가할 수 있고, DAG는 md만 지원하고, 각 task는 string, md, json, yaml 모두 지원함
 
-```
+```python
 dag.doc_md = __doc__
 
 t1.doc_md = """\
@@ -192,6 +192,30 @@ rendered in the UI's Task Instance Details page.
 ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
 """
 ```
+
+6. 의존성 설정
+예로 t1, t2, t3의 task가 선언이 되어 있을 때
+아래와 같이 선언이 가능하다. 기본적으로 set_downstream은 >> 와 같고, set_upstream은 << 와 같이 표현이 가능하다.
+
+```python
+t1.set_downstream(t2)
+t2.set_upstream(t1)
+t1 >> t2
+t2 << t1
+t1 >> t2 >> t3 #chaining
+t1 >> [t2, t3] #parallel
+```
+
+7. test
+아래를 실행했을 때 아무것도 일어나지 않는다면, 코드 문제 없이 잘 컴파일 된것임
+```
+$ python ~/airflow/dags/tutorial.py
+$ airflow list_dags #print the list of active DAGs
+```
+
+8. Backfill
+
+
 
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
 
