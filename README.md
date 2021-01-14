@@ -132,10 +132,34 @@ dag = DAG(
 
 3. Task 설정
 첫줄은 마찬가지로 task_id 로 unique 함.
-task에 대한 ㅈ
+task에 대한 규칙 및 룰
+ (1) argument 명시하여 보내라
+ (2) dictionary(default_args)에 있는 arguments를 override하여 사용하며, operator의 특별 argument 를 조합하라
+    (ex, bash_command, task_id etc)
+ (3) task_id와 owner 는 무조건 명시
+ 
+ ```
+ t1 = BashOperator(
+    task_id='print_date',
+    bash_command='date',
+    dag=dag,
+)
 
+t2 = BashOperator(
+    task_id='sleep',
+    depends_on_past=False,
+    bash_command='sleep 5',
+    retries=3,
+    dag=dag,
+)
+ ```
 
-
+4. Templating with Jinja 
+ - Jinja Templating 이란? (https://jinja.palletsprojects.com/en/2.11.x/)
+   : 파이썬 위에서 디자인을 원활히 해주기 위한 templating 언어/ 웹으로 확인을 할 수 있도록?
+ - Airflow 에서의 역할은 파라미터들을 전달해줌. params에 건내 받은 인자를 이용해 bash_command 에서 받은 인자를 이용 
+   params는 dictionary 형태로 선언.
+ - Airflow 에서의 역할은 파라미터들을 전달해줌. params에 건내 받은 인자를 이용해 bash_command 에서 받은 인자를 이용가능
 
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
 
