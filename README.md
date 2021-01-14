@@ -157,7 +157,7 @@ t2 = BashOperator(
  - Airflow 에서의 역할은 파라미터들을 전달해줌. params에 건내 받은 인자를 이용해 bash_command 에서 받은 인자를 이용 
    params는 dictionary 형태로 선언.
    
-```
+```python
 templated_command = """
 {% for i in range(5) %}
     echo "{{ ds }}"
@@ -210,9 +210,18 @@ $ python ~/airflow/dags/tutorial.py
 $ airflow list_dags #print the list of active DAGs
 ```
 
-8. Backfill
+8. Task간 데이터를 주고 받아야 하는 경우
+xcom을 사용한다. (admin-xcom)
+참고로 pythonOperator에서의 python_collable 함수에서는 return값이 자동으로 xcom에 push됨
 
+```python
+#저장하기 
+task_instance = kwargs['task_instance']
+task_instance.xcom_push(key='the key', value=my_str)
 
+#불러오기
+task_instance.xcom_pull(task_id='my_task', key='the key')
+```
 code: tutorial_hayz.py  
 task1: print_date (bash: 'date')  
 task2: print_wd  (base: 'pwd')  
