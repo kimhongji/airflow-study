@@ -89,7 +89,7 @@ task2: print_wd  (base: 'pwd')
 
 ### 코드 설명
 1. Default Arguments: dictionary 형식으로 표현된 DAG 생성자에 대한 기본 변수 설정 값
-특정한 operator (ex, BashOperator)에 대한 설정은 Document를 참고하면 됨
+특정한 operator (ex, BaseOperator)에 대한 설정은 Document를 참고하면 됨
 
 ```
 default_args = {
@@ -131,6 +131,9 @@ dag = DAG(
 ```
 
 3. Task 설정
+첫줄은 마찬가지로 task_id 로 unique 함.
+task에 대한 ㅈ
+
 
 
 
