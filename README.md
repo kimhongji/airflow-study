@@ -222,7 +222,7 @@ task_instance.xcom_push(key='the key', value=my_str)
 #불러오기
 task_instance.xcom_pull(task_id='my_task', key='the key')
 ```
-code: tutorial_hayz.py (#tutorial.py)
+code: tutorial_hayz.py  
 task1: print_date (bash: 'date')  
 task2: print_wd  (base: 'pwd')  
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
