@@ -4,7 +4,7 @@
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
 
--------------------------
+=========================
 
 ## UI/Screenshots (https://airflow.apache.org/docs/apache-airflow/stable/ui.html)
 
@@ -26,6 +26,8 @@ tree에 검은 테두리가 있는건: scheduled run 이고 / 검은 테두리�
 
 6. Task Duration은 과거의 n 번의 실행을 통해서 어떤 DAG 가 상대적으로 비용이 많이 소모가 되는지 등을 확인 할 수 있음
 
+-------------------------
 ## Concepts
 
+1. DAGs: 전체적으로 자신의 task들을 모아놓은 그래프라고 말할 수 있음.
 
