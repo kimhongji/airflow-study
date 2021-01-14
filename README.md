@@ -3,6 +3,7 @@ airflow tutorial &amp; study
 
 1. [Airflow 란?](#airflow-란?)  
 2. [Quick Start](#quick-start)
+3. [Tutorial](#tutorial)
 
 ---------------------
 
@@ -87,7 +88,49 @@ task1: print_date (bash: 'date')
 task2: print_wd  (base: 'pwd')
 
 ### 코드 설명
-1. Default Arguments
+1. Default Arguments: dictionary 형식으로 표현된 DAG 생성자에 대한 기본 변수 설정 값
+특정한 operator (ex, BashOperator)에 대한 설정은 Document를 참고하면 됨
+
+```
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': days_ago(2),
+    'email': ['airflow@example.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+    # 'queue': 'bash_queue',
+    # 'pool': 'backfill',
+    # 'priority_weight': 10,
+    # 'end_date': datetime(2016, 1, 1),
+    # 'wait_for_downstream': False,
+    # 'dag': dag,
+    # 'sla': timedelta(hours=2),
+    # 'execution_timeout': timedelta(seconds=300),
+    # 'on_failure_callback': some_function,
+    # 'on_success_callback': some_other_function,
+    # 'on_retry_callback': another_function,
+    # 'sla_miss_callback': yet_another_function,
+    # 'trigger_rule': 'all_success'
+}
+```
+
+2. DAG 생성
+DAG object 를 생성해야함. 가장 첫줄은 dag_id로 unique한 identifier임.
+또한 schedule_interval을 설정해야 함.
+
+```
+dag = DAG(
+    'tutorial',
+    default_args=default_args,
+    description='A simple tutorial DAG',
+    schedule_interval=timedelta(days=1),
+)
+```
+
+3. Task 설정
 
 
 
