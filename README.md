@@ -91,7 +91,7 @@ task2: print_wd  (base: 'pwd')
 1. Default Arguments: dictionary 형식으로 표현된 DAG 생성자에 대한 기본 변수 설정 값
 특정한 operator (ex, BaseOperator)에 대한 설정은 Document를 참고하면 됨
 
-```
+```python
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -121,7 +121,7 @@ default_args = {
 DAG object 를 생성해야함. 가장 첫줄은 dag_id로 unique한 identifier임.
 또한 schedule_interval을 설정해야 함.
 
-```
+```python
 dag = DAG(
     'tutorial',
     default_args=default_args,
@@ -160,7 +160,38 @@ t2 = BashOperator(
  - Airflow 에서의 역할은 파라미터들을 전달해줌. params에 건내 받은 인자를 이용해 bash_command 에서 받은 인자를 이용 
    params는 dictionary 형태로 선언.
    
-5. 
+```
+templated_command = """
+{% for i in range(5) %}
+    echo "{{ ds }}"
+    echo "{{ macros.ds_add(ds, 7)}}"
+    echo "{{ params.my_param }}"
+{% endfor %}
+"""
+
+t3 = BashOperator(
+    task_id='templated',
+    depends_on_past=False,
+    bash_command=templated_command,
+    params={'my_param': 'Parameter I passed in'},
+    dag=dag,
+)
+```
+   
+5.DAG 와 tasks document
+DAG나 각 싱글 task에 대해서 각각 문서를 추가할 수 있고, DAG는 md만 지원하고, 각 task는 string, md, json, yaml 모두 지원함
+
+```
+dag.doc_md = __doc__
+
+t1.doc_md = """\
+#### Task Documentation
+You can document your task using the attributes `doc_md` (markdown),
+`doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+rendered in the UI's Task Instance Details page.
+![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+"""
+```
 
 ![image](https://user-images.githubusercontent.com/36401495/104290430-ae243680-54fd-11eb-9c46-48e0a17674cc.png)
 
