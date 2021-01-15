@@ -30,4 +30,11 @@ tree에 검은 테두리가 있는건: scheduled run 이고 / 검은 테두리�
 ## Concepts
 
 1. DAGs: 전체적으로 자신의 task들을 모아놓은 그래프라고 말할 수 있음.
+airflow는 기본적으로 "airflow" 혹은 "DAG" 가 포함된 파이썬 파일을 기본적으로 찾고 이를 바꾸고 싶으면 *DAG_DISCOVERY_SAFE_MODE*를 False로 수정하면 됨.
+
+2. Scope: DAG를 함수 내부의 local 로 선언할 수가 있는데, 내부의 *subDagOperator*를 이용하는 경우 용이함
+
+3. Default Arguments: task내의 공통의 인자들을 관리하기에 용이함. 변경하고 싶다면 override 하면 됨
+
+4. Context Manager: 새로운 operator를 
 
