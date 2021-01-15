@@ -92,3 +92,6 @@ def push_function():
 def pull_function(**context):
     value = context['task_instance'].xcom_pull(task_ids='pushing_task')
  ```
+xcom을 serialization/deserialization 하고 싶으면 *xcom_backend* 파라미터를 config파일에서 수정.
+
+6. Variables: xcom과 비슷하게 임의 정보를 저장하고 추출할때 사용되는 일반적인 방법임. 또한 UI를 통해 json 파일을 bulk upload 시킬 수 있음. 
