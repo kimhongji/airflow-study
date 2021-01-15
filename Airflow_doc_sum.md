@@ -36,5 +36,21 @@ airflow는 기본적으로 "airflow" 혹은 "DAG" 가 포함된 파이썬 파일
 
 3. Default Arguments: task내의 공통의 인자들을 관리하기에 용이함. 변경하고 싶다면 override 하면 됨
 
-4. Context Manager: 새로운 operator를 
+4. Context Manager: 새로운 operator를 자동으로 할당해주는 건데 아래 처럼 쓰인다.
+```python
+with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
+    op = DummyOperator('op')
 
+op.dag is dag # True
+
+```
+
+5. DAG Runs: DAG의 물리적인 인스턴스. 보통 schedular에 의해 생성되고 때론 trigger에 의해 생성됨.
+
+6. execution_date: 실제로 DAG가 실행되는 시간
+
+7. Task Instances: execution_date안에서 실행되고 있는 task를 말함
+
+8. Task Lifecyle: No status -> scheduled -> queued -> running -> (success, failed) -> 필요시 retry
+
+9. Operators: 각 operator는 하나의 task를 나타내고 
