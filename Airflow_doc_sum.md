@@ -77,7 +77,9 @@ op.dag is dag # True
 4. Queues: 기본 queue 설정은 airflow.cfg의 celery -> default_queue에 있음. 
 
 5. XComs: task간의 메시지를 교류할 수 있게 해주는 "cross-communication"의 약어임. 원칙적으로 key-value 형태로 정의되며, pushed 와 pulled 를 사용하여 주고 받음.
+ 주의) max size는 48KB 정도로 대용량 파일 전송의 용도로는 적합하지 않음!
  
+ *provide_context* 설정을 꼭 *true* 해야 함
  ```python
  # inside a PythonOperator called 'pushing_task'
 def push_function():
