@@ -3,6 +3,7 @@
 
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
+### 3. [Additional Functionality](#additional-functionality)
 
 -----------------------------
 
@@ -62,3 +63,27 @@ op.dag is dag # True
   (4) simpleHttpOperator: Http request 보내기  
   (5) mysqloperator, sqliteoperator, jdbcoperator etc...(about SQL)  
 ```
+
+----------------------------
+
+## Additional Functionality
+
+1. Hooks: 외부의 데이터베이스에 접근하기 위한 인터페이스.  
+
+2. Pools: task의 병렬 실행에 제한을 둬서 병목현상을 방지함. (UI에서 menu -> admin -> pools 에서 확인 가능) 우선순위 변수(*priority_weight*) 설정을 통해 우선순위를 설정할 수 있음.
+
+3. Connections: 외부 시스템과 정보를 교환 하고 싶을때 사용하며 *conn_id* 를 이용함. 
+
+4. Queues: 기본 queue 설정은 airflow.cfg의 celery -> default_queue에 있음. 
+
+5. XComs: task간의 메시지를 교류할 수 있게 해주는 "cross-communication"의 약어임. 원칙적으로 key-value 형태로 정의되며, pushed 와 pulled 를 사용하여 주고 받음.
+ 
+ ```python
+ # inside a PythonOperator called 'pushing_task'
+def push_function():
+    return value
+
+# inside another PythonOperator where provide_context=True
+def pull_function(**context):
+    value = context['task_instance'].xcom_pull(task_ids='pushing_task')
+ ```
