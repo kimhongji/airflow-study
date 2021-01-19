@@ -49,3 +49,8 @@ Q. dag 연산을 더 빠르게 할 순 없는지?
 A. 다양한 방법들이 있음. 보통 airflow.cfg 의 파라미터를 튜닝 하는 방식임
  - *parallelism* : airflow의 전체 클러스터에서 task 인스턴스가 동시에 돌아가는 갯수를 관리함
  - *concurrency* : 스케쥴러가 돌아가는 dag에서 최대..? dag에서 설정하지 않으면 cfg의 *dag_concurrency* 값을 이용함
+ - *task_concurrency*
+ - *max_active_runs*
+ - *pool*
+ 
+ 
