@@ -92,7 +92,7 @@ $ airflow scheduler
 default_args = {
     'owner': 'airflow',                                #owner of the task
     'depends_on_past': False,                          #이전 task의 성공 여부를 반영하여 실행할지
-    'start_date': days_ago(2),
+    'start_date': days_ago(2),                         
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
@@ -112,6 +112,14 @@ default_args = {
     # 'sla_miss_callback': yet_another_function,
     # 'trigger_rule': 'all_success'
 }
+```
+
+```
+** 주의 **
+execution_date: 실행 날짜가 아니라 실행을 시작하려한 시간이다.
+항상 UTC 기준으로의 시간을 생각해라!
+start_date: 첫 DAG 시작 시간으로, 정적인 값이다!
+schedule_interval: cron or timedelta 값을 받음, 주기적인 실행에 필요
 ```
 
 2. DAG 생성

@@ -30,7 +30,7 @@ dag = DAG(
 
 t1 = BashOperator(
 	task_id='straw-cli',
-	bash_command='/Users/kakao_ent/git_straw/straw-cli-1.0.0-rc16/bin/straw-cli count  --strawUrl=http://straw-feature.is.daumkakao.io/boxes/205/hayz_type_2 --executorMemory 2G > $AIRFLOW_HOME/log',
+	bash_command='/Users/kakao_ent/git_straw/straw-cli-1.0.0-rc16/bin/straw-cli count  --strawUrl=(straw_url) --executorMemory 2G > $AIRFLOW_HOME/log',
 	dag=dag,
 )
 
