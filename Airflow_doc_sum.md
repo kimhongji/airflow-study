@@ -149,8 +149,24 @@ task = PythonOperator(
 )
 ```
 
+## Airflow 동적 workflow 생성하는 다양한 방법
+
+1. using globals()
+아래와 같이 이용 가능하다. 단점은 항상 가능하지 않다는 것임, 즉 REST API 나 외부 트리거에 의해 만들어 지는 경우는 불가능하다. 
+
+```python
+for i in range(10):
+    dag_id = f'dynamic_dag_{i}'
+    globals()[dag_id] = DAG(dag_id)
+```
+
+2. using Variables
+globals()를 활용하는 것과 비슷해 보일 수 있음.   
+
+
+3. generating python files using templates
 
 ## Reference
 https://louisdev.tistory.com/28  
-
+https://sairamkrish.medium.com/apache-airflow-dynamic-workflow-creation-using-templates-3e6fae88045c
 
