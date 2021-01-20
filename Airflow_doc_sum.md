@@ -96,6 +96,31 @@ def pull_function(**context):
 xcom을 serialization/deserialization 하고 싶으면 *xcom_backend* 파라미터를 config파일에서 수정.
 
 6. Variables: xcom과 비슷하게 임의 정보를 저장하고 추출할때 사용되는 일반적인 방법임. 또한 UI를 통해 json 파일을 bulk upload 시킬 수 있음. 
+web UI를 통해서 json 형식으로 등록할 수 있고, 해당 정보를 이용하여 아래와 같이 사용할 수 있다. 
+
+```python
+from airflow.models import Variable
+
+# Common (Not-so-nice way)
+# 3 DB connections when the file is parsed
+var1 = Variable.get("var1")  //단일 key, val로 저장한 경우 
+var2 = Variable.get("var2")
+var3 = Variable.get("var3")
+
+# Recommended Way
+# Just 1 Database call
+dag_config = Variable.get("dag1_config", deserialize_json=True) //json 형식으로 val 값이 {"val1": "value1"} 이런식인 경
+dag_config["var1"]
+dag_config["var2"]
+dag_config["var3"]
+
+# You can directly use it Templated arguments {{ var.json.my_var.path }}
+bash_task = BashOperator(
+    task_id="bash_task",
+    bash_command='{{ var.json.dag1_config.var1 }} ',
+    dag=dag,
+)
+```
 
 
 ## Airflow에 파라미터를 전달하여 실행해보기 
@@ -109,6 +134,7 @@ $ airflow trigger_dag -c '{"table": "my_table"}' (daag_id)
 여기서 주의해야 할 점은, argument를 받아오는 dag는 webUI에서 실행하지 못함!!!!! 
 
 (python에서의 kwargs 는 keyword argument의 줄임말로 딕셔너리 형태로 전달받는다)
+
 ```python
 ## python operator 사용시
 def print_arguments(**kwargs):
