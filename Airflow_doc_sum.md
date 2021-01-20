@@ -38,6 +38,7 @@ airflow는 기본적으로 "airflow" 혹은 "DAG" 가 포함된 파이썬 파일
 3. Default Arguments: task내의 공통의 인자들을 관리하기에 용이함. 변경하고 싶다면 override 하면 됨
 
 4. Context Manager: 새로운 operator를 자동으로 할당해주는 건데 아래 처럼 쓰인다.
+
 ```python
 with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
     op = DummyOperator('op')
@@ -95,3 +96,35 @@ def pull_function(**context):
 xcom을 serialization/deserialization 하고 싶으면 *xcom_backend* 파라미터를 config파일에서 수정.
 
 6. Variables: xcom과 비슷하게 임의 정보를 저장하고 추출할때 사용되는 일반적인 방법임. 또한 UI를 통해 json 파일을 bulk upload 시킬 수 있음. 
+
+
+## Airflow에 파라미터를 전달하여 실행해보기 
+
+1. trigger_dag를 통해 argument를 전달 할 수 있다. 아래와 같이 -c 옵션 뒤의 json 데이터를 전달 할 수 있다. 
+
+```
+$ airflow trigger_dag -c '{"table": "my_table"}' (daag_id)
+```
+전달된 파라미터는 아래와 같이 kwargs를 이용하여 추출할 수 있다. 
+여기서 주의해야 할 점은, argument를 받아오는 dag는 webUI에서 실행하지 못함!!!!! 
+
+(python에서의 kwargs 는 keyword argument의 줄임말로 딕셔너리 형태로 전달받는다)
+```python
+## python operator 사용시
+def print_arguments(**kwargs):
+    table_name = kwargs['dag_run'].conf.get('table')
+    print(table_name)
+
+task = PythonOperator(
+    task_id="sample_task",
+    python_callable=print_arguments,
+    provide_context=True,                ## 반드시 해당 옵션을 지정해야 함
+    dag=dag
+)
+```
+
+
+## Reference
+https://louisdev.tistory.com/28  
+
+

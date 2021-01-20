@@ -53,6 +53,47 @@ task1 >> [task2, task3]
 1. oozie : airflow 에 비해 web gui 도 약하고 java나 xml 로 관리함, 파이프 라인 구축이 복잡함, 대체적으로 UI 와 task 의존성 관리 측면에서 airflow 가 우수하다는 의견이 많음, 그리고 표현이 간결한 게 airflow 장점으로 꼽힘
 
 
+## DAG Runs
+DAG가 인스턴스화 되어서 실행하는 상태(?)를 나타냄
+DAG에는 *schedule_interval* 을 이용하여 스케쥴링을 하고 cron 표현을 이용하여 설정할 수가 있고, timedelta 로도 표현이 가능하고, 또 cron의 "presets"을 이용할수도 있음. 
+
+cron 의 presets 이란?
+
+```
+None: 스케쥴링 하지 않고 트리거에 의해 동작
+@once
+@hourly : 0 * * * *
+@daily: 0 0 * * * 
+@weekly: 0 0 * * 0
+@monthly: 0 0 1 * *
+@quarterly: 0 0 1 */3 *
+@yearly: 0 0 1 1 *
+```
+
+### Passing Parameters when triggering dags
+CLI를 통해서 실행시키거나, REST API, UI를 통해서 트리거를 할 때 json blob을 통해서 job을 건낼 수 있다. 
+근데 트리거를 이용하면!!! 스케쥴링에는 안맞을 수도 있음...
+
+kwargs를 이용하면 python 함수를 통해 pythonOperator를 이용해야 함... => 그러면 이전 dag 설정 같은 부분은 불리할 수도 있음!
+
+```python
+from airflow.operators.bash_operator import BashOperator
+from airflow.utils.dates import days_ago
+
+dag = DAG("example_parametrized_dag", schedule_interval=None, start_date=days_ago(2))
+
+#print_arguments 함수는 kwargs를 활용하는 예시를 위해 추가
+def print_arguments(**kwargs):
+    table_name = kwargs['dag_run'].conf.get('table')
+    print(table_name)
+
+parameterized_task = BashOperator(
+    task_id='parameterized_task',
+    bash_command="echo value: {{ dag_run.conf['conf1'] }}",
+    dag=dag,
+)
+
+```
 ----------------------
 
 ## Quick Start
