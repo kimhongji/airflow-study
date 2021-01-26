@@ -57,12 +57,15 @@ op.dag is dag # True
 
 9. Operators: 각 operator는 하나의 task를 나타냄. 만약에 두 operator 가 데이터를 공유하고 싶다면, 하나의 operator로 결합할 수 있다. 
 아니면 XCom이라는 operator간 통신할 수 있는 기능을 활용하면 된다. 
+
 ```
   (1) BashOperator: bash command 실행  
   (2) PythonOpeator: python 함수 실행  
   (3) EmailOperator: email 보내기  
   (4) simpleHttpOperator: Http request 보내기  
   (5) mysqloperator, sqliteoperator, jdbcoperator etc...(about SQL)  
+  (6) SparkSubmitOperator
+  (7) SSHOperator
 ```
 
 ----------------------------
