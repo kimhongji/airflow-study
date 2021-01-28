@@ -103,13 +103,15 @@ Mac OS
 ```bash
 $ sudo easy_install pip  // brew install python -> pip3 로 설치됨 (pip -V 로  20.2.4 확인)
 
+//설치 방법 옵션 1
 $ sudo -H pip install apache-airflow // pip 버전이 20.3 이상이라면 --use-deprecated legacy-resolver 옵션 추가
 
-//실제 command 는 아래 임 permission 문제 때문에 --user 옵션을 추가하고 실행함
+//설치 방법 옵션 2: 실제 command 는 아래 임 permission 문제 때문에 --user 옵션을 추가하고 실행함
 $ sudo -H pip install --user apache-airflow==1.10.14 --use-deprecated legacy-resolver --constraint https://raw.githubusercontent.com/apache/airflow/constraints-1.10.14/constraints-2.7.txt
 
-//pip3로 python3.7 환경에서 설치한다면 아래와 같이 설치, airflow는 2.0.0 버전으로 설치됨
-$ sudo -H pip3 install apache-airflow
+//설치 방법 옵션 3: permission 문제로 --user 옵션을 붙이고 아래와 같이 설정 (python 3.7인 경우)
+$ pip3 install --user apache-airflow --constraint https://raw.githubusercontent.com/apache/airflow/constraints-2.0.0/constraints-3.7.txt
+
 
 $ pip freeze | grep airflow
 $ vi ~/.bash_profile //path 설정
