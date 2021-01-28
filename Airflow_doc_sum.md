@@ -1,8 +1,6 @@
 # airflow doc. 을 보면서 정리한 세부사항 및 알아두면 좋을 것들 
 ### link: https://airflow.apache.org/docs/
 
-#### 현재 1.10.14 버전을 기준으로 
-
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
 ### 3. [Additional Functionality](#additional-functionality)
@@ -175,8 +173,74 @@ globals()를 활용하는 것과 비슷해 보일 수 있다.
 
 ## Tutorial on the Taskflow API (new 2.0.0)
 
-airflow 2.0.0 버전에서는 Taskflow 라는 것을 새롭게 소개한다. 
+### airflow 2.0.0 버전에서는 Taskflow 라는 것을 새롭게 소개한다. 
 
+"Taskflow API"를 이용하여 ETL 파이프라인을 구축하는 예시를 소개한다.
+
+
+
+```python
+import json
+
+from airflow.decorators import dag, task
+from airflow.utils.dates import days_ago
+# These args will get passed on to each operator
+# You can override them on a per-task basis during operator initialization
+default_args = {
+    'owner': 'airflow',
+}
+@dag(default_args=default_args, schedule_interval=None, start_date=days_ago(2))
+# 전통적인 airflow dag 생성방법과 다르게 ```@dag``` 를 이용하여 dag를 구축한다. 
+
+def tutorial_taskflow_api_etl():
+    """
+    ### TaskFlow API Tutorial Documentation
+    This is a simple ETL data pipeline example which demonstrates the use of
+    the TaskFlow API using three simple tasks for Extract, Transform, and Load.
+    Documentation that goes along with the Airflow TaskFlow API tutorial is
+    located
+    [here](https://airflow.apache.org/docs/stable/tutorial_taskflow_api.html)
+    """
+    @task()
+    def extract():
+        """
+        #### Extract task
+        A simple Extract task to get data ready for the rest of the data
+        pipeline. In this case, getting data is simulated by reading from a
+        hardcoded JSON string.
+        """
+        data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
+
+        order_data_dict = json.loads(data_string)
+        return order_data_dict
+    @task(multiple_outputs=True)
+    def transform(order_data_dict: dict):
+        """
+        #### Transform task
+        A simple Transform task which takes in the collection of order data and
+        computes the total order value.
+        """
+        total_order_value = 0
+
+        for value in order_data_dict.values():
+            total_order_value += value
+
+        return {"total_order_value": total_order_value}
+    @task()
+    def load(total_order_value: float):
+        """
+        #### Load task
+        A simple Load task which takes in the result of the Transform task and
+        instead of saving it to end user review, just prints it out.
+        """
+
+        print("Total order value is: %.2f" % total_order_value)
+    order_data = extract()
+    order_summary = transform(order_data)
+    load(order_summary["total_order_value"])
+tutorial_etl_dag = tutorial_taskflow_api_etl()
+
+```
 
 ## Reference
 https://louisdev.tistory.com/28  
