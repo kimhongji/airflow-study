@@ -4,6 +4,7 @@
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
 ### 3. [Additional Functionality](#additional-functionality)
+### 4. [Tutorial on the Taskflow API(new 2.0.0)](#tutorial-on-the-taskflow-api)
 
 -----------------------------
 
@@ -171,13 +172,13 @@ globals()를 활용하는 것과 비슷해 보일 수 있다.
 
 ------------------
 
-## Tutorial on the Taskflow API (new 2.0.0)
+## Tutorial on the Taskflow API 
+##### (new 2.0.0)
 
 ### airflow 2.0.0 버전에서는 Taskflow 라는 것을 새롭게 소개한다. 
 
 "Taskflow API"를 이용하여 ETL 파이프라인을 구축하는 예시를 소개한다.
-
-
+이를 사용하면 기존의 xcom등을 이용하여 task간 교류했던 복잡한 문제들을 해결하고, 더욱 간단하게 표현할 수 있다.
 
 ```python
 import json
@@ -235,14 +236,17 @@ def tutorial_taskflow_api_etl():
         """
 
         print("Total order value is: %.2f" % total_order_value)
+    
+    #아래는 각 task를 연결하여 dag를 구성한다.
     order_data = extract()
     order_summary = transform(order_data)
     load(order_summary["total_order_value"])
+
 tutorial_etl_dag = tutorial_taskflow_api_etl()
 
 ```
 
 ## Reference
-https://louisdev.tistory.com/28  
-https://sairamkrish.medium.com/apache-airflow-dynamic-workflow-creation-using-templates-3e6fae88045c
-
+* https://louisdev.tistory.com/28  
+* https://sairamkrish.medium.com/apache-airflow-dynamic-workflow-creation-using-templates-3e6fae88045c
+* taskAPI 관련: https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html
