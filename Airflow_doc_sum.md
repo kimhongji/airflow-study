@@ -1,5 +1,7 @@
-# airflow doc. 을 보면서 정리한 세부사항 및 알아두면 좋을 것들
+# airflow doc. 을 보면서 정리한 세부사항 및 알아두면 좋을 것들 
 ### link: https://airflow.apache.org/docs/
+
+#### 현재 1.10.14 버전을 기준으로 
 
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
@@ -164,10 +166,17 @@ for i in range(10):
 ```
 
 2. using Variables
-globals()를 활용하는 것과 비슷해 보일 수 있음.   
+globals()를 활용하는 것과 비슷해 보일 수 있다. 
 
 
 3. generating python files using templates
+
+------------------
+
+## Tutorial on the Taskflow API (new 2.0.0)
+
+airflow 2.0.0 버전에서는 Taskflow 라는 것을 새롭게 소개한다. 
+
 
 ## Reference
 https://louisdev.tistory.com/28  
