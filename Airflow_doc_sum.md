@@ -258,8 +258,9 @@ airflow 에서는 external_task의 ExternalTaskMarker, ExternalTaskSensor 를 �
 * ExternalTaskSensor : 후행되는 DAG에서 호출되는 task로, 선행되는 DAG에서 allowed_states에 해당하는 상태로 끝이난 경우 작업이 실행된다. 이 경우 해당 DAG의 가장 첫번째 task로 호출하는 것이 좋다. 
 
 ##### [note]
-> scheduler_interval이 같아야지 ExternalTaskSensor가 캐치할 수 있음.
-> 각 선행, 후행 DAG에서는 각자의 dag_id, task_id를 명시해두어야 함.
+> scheduler_interval이 같아야지 ExternalTaskSensor가 캐치할 수 있음.  
+> 각 선행, 후행 DAG에서는 각자의 dag_id, task_id를 명시해두어야 함.  
+> ExternalTaskMarker는 없어도 ExternalTaskSensor가 해당 DAG의 task가 끝났는지 캐치할 수 있음.
 
 ###### exmple
 
