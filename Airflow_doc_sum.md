@@ -5,6 +5,7 @@
 ### 2. [Concepts](#concepts)
 ### 3. [Additional Functionality](#additional-functionality)
 ### 4. [Tutorial on the Taskflow API(new 2.0.0)](#tutorial-on-the-taskflow-api)
+### 5. [Cross-DAG Dependencies](#cross-dag-dependencies)
 
 -----------------------------
 
@@ -191,7 +192,7 @@ default_args = {
     'owner': 'airflow',
 }
 @dag(default_args=default_args, schedule_interval=None, start_date=days_ago(2))
-# 전통적인 airflow dag 생성방법과 다르게 ```@dag``` 를 이용하여 dag를 구축한다. 
+# 전통적인 airflow dag 생성방법과 다르게 @dag 를 이용하여 dag를 구축한다. 
 
 def tutorial_taskflow_api_etl():
     """
@@ -246,7 +247,83 @@ tutorial_etl_dag = tutorial_taskflow_api_etl()
 
 ```
 
+-------------
+
+## Cross-DAG Dependencies
+
+airflow는 task간의 의존성은 upstream, downstream 등을 이용하여 제공한다. 하지만 어떤 경우에서는 DAG 간의 의존성이 필요한 경우도 존재한다. 
+airflow 에서는 external_task의 ExternalTaskMarker, ExternalTaskSensor 를 이용해서 이를 지원한다. 
+
+* ExternalTaskMarker : 선행되는 DAG에서 호출되는 task로, 해당 task가 allowed_states 로 끝나게 되면 이 후 후행되는 DAG 가 실행된다. 해당 DAG의 가장 마지막 task로 호출하는 것이 좋다. 
+* ExternalTaskSensor : 후행되는 DAG에서 호출되는 task로, 선행되는 DAG에서 allowed_states에 해당하는 상태로 끝이난 경우 작업이 실행된다. 이 경우 해당 DAG의 가장 첫번째 task로 호출하는 것이 좋다. 
+
+##### [note]
+> scheduler_interval이 같아야지 ExternalTaskSensor가 캐치할 수 있음.
+> 각 선행, 후행 DAG에서는 각자의 dag_id, task_id를 명시해두어야 함.
+
+###### exmple
+
+```python
+import datetime
+
+from airflow import DAG
+from airflow.operators.dummy import DummyOperator
+from airflow.sensors.external_task import ExternalTaskMarker, ExternalTaskSensor
+from airflow.operators.python import PythonOperator
+
+start_date = datetime.datetime(2021,1,1)
+
+with DAG(
+    dag_id = "cross_hello_world",
+    start_date = start_date,
+    schedule_interval = '* * * * *',
+    tags = ['example_hello'],
+) as parent_dag:
+    def process_task_1(**context):
+        print('simple hello world')
+
+    start_task = PythonOperator(
+        task_id = "print_task_1",
+        python_callable = process_task_1,
+        provide_context = True
+    )
+
+    parent_task = ExternalTaskMarker(
+        task_id = "parent_task",
+        external_dag_id = "example_marker_child_task",
+        external_task_id = "child_task1"
+    )
+
+    start_task >> parent_task
+
+
+with DAG(
+    dag_id = "example_marker_child_task",
+    start_date = start_date,
+    schedule_interval = '* * * * *',
+    tags = ['example2'],
+) as child_dag:
+    child_task1 = ExternalTaskSensor(
+        task_id = "child_task1",
+        external_dag_id = parent_dag.dag_id,
+        external_task_id = parent_task.task_id,
+        timeout = 600,
+        allowed_states = ['success'],
+        failed_states = ['failed', 'skipped'],
+        mode = 'reschedule',
+    )
+    child_task2 = DummyOperator(task_id = "child_task2")
+
+    child_task1 >> child_task2
+
+
+
+```
+
+
 ## Reference
 * https://louisdev.tistory.com/28  
 * https://sairamkrish.medium.com/apache-airflow-dynamic-workflow-creation-using-templates-3e6fae88045c
 * taskAPI 관련: https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html
+* cross-DAG 관련: https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/external_task_sensor.html,  
+                https://towardsdatascience.com/dependencies-between-dags-in-apache-airflow-2f5935cde3f0
