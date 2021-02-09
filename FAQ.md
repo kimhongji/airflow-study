@@ -4,8 +4,8 @@ Airflow 관련하여 자주하는 질문, 헷갈리는 것들
 
 ----------------
 
-Q. 생성한 테스크가 스케쥴링 되지 않아요!
-A. 다양한 이유들이 있음. 
+### Q. 생성한 테스크가 스케쥴링 되지 않아요!
+### A. 다양한 이유들이 있음. 
   1. airflow 엔진에 본인의 DAG 가 컴파일 되어 있지 않을 수 있으니 아래 커맨드를 통해 확인해 보고, 두번째 커맨드를 통해 DAG의 tree를 확인 해 볼수 있음.
   안나온다면.. airflow dags 에 업로드가 안된거임 $AIRFLOW_HOME/dags 폴더 안에 정의한 dag python 파일이 있나 확인해 보삼.
   
@@ -22,14 +22,14 @@ A. 다양한 이유들이 있음.
   6. *concurrency*파라미터와 *max_active_runs* 에 대해서 알아보고 확인해보기
   
   
-Q. *start_date*는 어떻게 다루는건가여?  
-A. now() 등과 같은 동적인 기간은 혼란스러울 수 있으므로 권유하지 않음. 그리고 *schedule_interval*을 설정할 때는 cron 형식을 취하는 것이 반복적인 스케쥴 관리에 좋음.
+### Q. *start_date*는 어떻게 다루는건가여?  
+### A. now() 등과 같은 동적인 기간은 혼란스러울 수 있으므로 권유하지 않음. 그리고 *schedule_interval*을 설정할 때는 cron 형식을 취하는 것이 반복적인 스케쥴 관리에 좋음.
 
-Q. catchup 파라미터는 뭔가요?  
-A. catchup이 true 가 된다면, start_date와 현재 trigger된 시점에 따라 기존 돌아가지 못했던 DAG를 순차적으로 실행할 수 있게 하함. 
+### Q. catchup 파라미터는 뭔가요?  
+### A. catchup이 true 가 된다면, start_date와 현재 trigger된 시점에 따라 기존 돌아가지 못했던 DAG를 순차적으로 실행할 수 있게 하함. 
 
-Q. DAG를 통적으로 생성할 수 있을 까?  
-A. airflow는 /dags 폴더를 확인하며 탐색을 함. dag_id 이름을 동적으로 생성해 가는데 기본적인 *globals()* 함수를 이용한 것이고, python에서 dictionary역할을 함
+### Q. DAG를 통적으로 생성할 수 있을 까?  
+### A. airflow는 /dags 폴더를 확인하며 탐색을 함. dag_id 이름을 동적으로 생성해 가는데 기본적인 *globals()* 함수를 이용한 것이고, python에서 dictionary역할을 함
  
 ```python
 def create_dag(dag_id):
@@ -49,12 +49,18 @@ for i in range(10):
     globals()[other_dag_id] = create_dag(other_dag_id)
 ```
 
-Q. dag 연산을 더 빠르게 할 순 없는지?
-A. 다양한 방법들이 있음. 보통 airflow.cfg 의 파라미터를 튜닝 하는 방식임
+### Q. dag 연산을 더 빠르게 할 순 없는지?
+### A. 다양한 방법들이 있음. 보통 airflow.cfg 의 파라미터를 튜닝 하는 방식임
  - *parallelism* : airflow의 전체 클러스터에서 task 인스턴스가 동시에 돌아가는 갯수를 관리함
  - *concurrency* : 스케쥴러가 돌아가는 dag에서 최대..? dag에서 설정하지 않으면 cfg의 *dag_concurrency* 값을 이용함
  - *task_concurrency*
  - *max_active_runs*
  - *pool*
  
- 
+ ### Q. dag 파일을 생성후 ui 에서 잡히고 시작되는 시간이 너무 길어요
+ ### A. airflow의 설정을 보면 schedule의 조절하는 환경 변수가 있음! 해당 값이 default로 5분 이라 조정하면 된다
+ ```
+ [scheduler]
+ dag_dir_list_interval = 300
+ #default = 300 , 초 단위 이므로 5
+ ```
