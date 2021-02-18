@@ -70,6 +70,13 @@ op.dag is dag # True
   (7) SSHOperator
 ```
 
+10. trigger rules: 앞선 task들의 결과에 의해 해당 task를 제어하는 방법을 말한다. 아래 예시와 같이 trigger_rule에 인자를 넣어주면, 해당 인자의 조건이 만족하면 동작을 수행하고 그렇지 않다면 *skipped* 상태로 동작한다. 
+
+```python
+join = DummyOperator(task_id='join', dag=dag, trigger_rule='none_failed_or_skipped')
+```
+인자의 종류는 *all_success*, *all_failed*, *all_done*, *one_failed*, *one_success* 등이 있다. 
+
 ----------------------------
 
 ## Additional Functionality
