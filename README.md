@@ -26,6 +26,11 @@ https://airflow.apache.org/
 - webserver와 scheduler 두개를 실행 시키고 시작
 
 ```
+[note]
+airflow 2.0버전 이상 부터는 timezone을 local로 보이도록 UI 설정 수 있다.
+```
+
+```
 $ airflow webserver
 $ airflow scheduler
 ```
