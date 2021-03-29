@@ -1,5 +1,6 @@
 # airflow doc. 을 보면서 정리한 세부사항 및 알아두면 좋을 것들 
 ### link: https://airflow.apache.org/docs/
+airflow 1.10.14, 2.0.0 
 
 ### 1. [UI/Screenshots](#ui/screenshots)
 ### 2. [Concepts](#concepts)
