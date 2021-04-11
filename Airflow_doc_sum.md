@@ -6,7 +6,7 @@
 ### 3. [Additional Functionality](#additional-functionality)
 ### 4. [Tutorial on the Taskflow API(new 2.0.0)](#tutorial-on-the-taskflow-api)
 ### 5. [Cross-DAG Dependencies](#cross-dag-dependencies)
-
+### 6. [Executor](#executor)
 -----------------------------
 
 ## UI/Screenshots (https://airflow.apache.org/docs/apache-airflow/stable/ui.html)
@@ -327,7 +327,13 @@ with DAG(
 
 
 ```
+---------
 
+## Executor
+airflow는 task돌리기 위해 다양한 종류의 executor를 지원한다.
+
+  * SequentialExecutor 가 기본으로 적용되며 SQLite를 사용하는 유일한 버전이다. SQLite는 다중 연결이 불가능하기 때문에 한번에 하나의 task만 실행 가능 하다. 따라서 배포용으로는 조금 적절치 않다. 
+  * LocalExecutor/CelaryExecutor 는 외부 MySQL, PostgreSQL을 이용하여 다중 연결을 지원하는 버전으로, 여러 task를 동시에 실행할 수 있다. 두 차이는 하나의 호스트 이냐 여러대의 호스트이냐의 차이가 있다. 
 
 ## Reference
 * https://louisdev.tistory.com/28  
